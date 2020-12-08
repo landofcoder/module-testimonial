@@ -20,8 +20,11 @@
  */
 
 namespace Ves\Testimonial\Model;
+use Ves\Testimonial\Api\Data\TestimonialInterface;
+use Ves\Testimonial\Api\Data\TestimonialInterfaceFactory;
+use Magento\Framework\Api\DataObjectHelper;
 
-class Testimonial extends \Magento\Framework\Model\AbstractModel
+class Testimonial extends \Magento\Framework\Model\AbstractModel implements TestimonialInterface
 {
     /**
      * Blog's Statuses
@@ -61,7 +64,9 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
      */
     const CACHE_TAG = 'ves_testimonial_testimonial';
 
+    protected $testimonialDataFactory;
 
+    protected $dataObjectHelper;
     /**
      * Testimonial constructor.
      * @param \Magento\Framework\Model\Context $context
@@ -71,6 +76,8 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\UrlInterface $url
      * @param \Ves\Testimonial\Helper\Data $testimonialHelper
+     * @param TestimonialInterfaceFactory $testimonialDataFactory
+     * @param DataObjectHelper $dataObjectHelper
      * @param array $data
      */
     public function __construct(
@@ -81,6 +88,8 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\UrlInterface $url,
         \Ves\Testimonial\Helper\Data $testimonialHelper,
+        TestimonialInterfaceFactory $testimonialDataFactory,
+        DataObjectHelper $dataObjectHelper,
         array $data = []
     ) {
         $this->_storeManager = $storeManager;
@@ -88,6 +97,8 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->_resource          = $resource;
         $this->_testimonialHelper = $testimonialHelper;
+        $this->testimonialDataFactory = $testimonialDataFactory;
+        $this->dataObjectHelper = $dataObjectHelper;
 
     }//end __construct()
 
@@ -101,7 +112,23 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
 
     }//end _construct()
 
-
+    /**
+     * Retrieve category model with category data
+     * @return TestimonialInterface
+     */
+    public function getDataModel()
+    {
+        $testimonialData = $this->getData();
+        
+        $testimonialDataObject = $this->testimonialDataFactory->create();
+        $this->dataObjectHelper->populateWithArray(
+            $testimonialDataObject,
+            $testimonialData,
+            TestimonialInterface::class
+        );
+        
+        return $testimonialDataObject;
+    }
     /**
      * Prevent blocks recursion
      *
@@ -121,29 +148,6 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
 
     }//end beforeSave()
 
-
-
-    public function getCreateTime()
-    {
-        $dateTime   = $this->getData('create_time');
-        $dateFormat = $this->_testimonialHelper->getConfig('general/dateformat');
-        return $this->_testimonialHelper->getFormatDate($dateTime, $dateFormat);
-
-    }//end getCreateTime()
-
-
-    /**
-     * Receive page store ids
-     *
-     * @return int[]
-     */
-    public function getStores()
-    {
-        return $this->hasData('stores') ? $this->getData('stores') : $this->getData('store_id');
-
-    }//end getStores()
-
-
     /**
      * Prepare page's statuses.
      * Available event cms_page_get_available_statuses to customize statuses.
@@ -159,5 +163,374 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel
 
     }//end getAvailableStatuses()
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getTestimonialId(){
+        return $this->getData(self::TESTIMONIAL_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTestimonialId($value){
+        return $this->setData(self::TESTIMONIAL_ID, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNickName(){
+        return $this->getData(self::NICK_NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNickName($value){
+        return $this->setData(self::NICK_NAME, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail(){
+        return $this->getData(self::EMAIL);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($value){
+        return $this->setData(self::EMAIL, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage(){
+        return $this->getData(self::IMAGE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setImage($value){
+        return $this->setData(self::IMAGE, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompanyAddress(){
+        return $this->getData(self::COMPANY_ADDRESS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompanyAddress($value){
+        return $this->setData(self::COMPANY_ADDRESS, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompanyName(){
+        return $this->getData(self::COMPANY_NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompanyName($value){
+        return $this->setData(self::COMPANY_NAME, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCompanyWebsite(){
+        return $this->getData(self::COMPANY_WEBISTE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCompanyWebsite($value){
+        return $this->setData(self::COMPANY_WEBISTE, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition(){
+        return $this->getData(self::POSITION);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($value){
+        return $this->setData(self::POSITION, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLinkedin(){
+        return $this->getData(self::LINKEDIN);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLinkedin($value){
+        return $this->setData(self::LINKEDIN, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFacebook(){
+        return $this->getData(self::FACEBOOK);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFacebook($value){
+        return $this->setData(self::FACEBOOK, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTwitter(){
+        return $this->getData(self::TWITTER);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTwitter($value){
+        return $this->setData(self::TWITTER, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getYoutube(){
+        return $this->getData(self::YOUTUBE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setYoutube($value){
+        return $this->setData(self::YOUTUBE, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVimeo(){
+        return $this->getData(self::VIMEO);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVimeo($value){
+        return $this->setData(self::VIMEO, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGoogleplus(){
+        return $this->getData(self::GOOGLEPLUS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGoogleplus($value){
+        return $this->setData(self::GOOGLEPLUS, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAddress(){
+        return $this->getData(self::ADDRESS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAddress($value){
+        return $this->setData(self::ADDRESS, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTestimonial(){
+        return $this->getData(self::TESTIMONIAL);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTestimonial($value){
+        return $this->setData(self::TESTIMONIAL, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreateTime()
+    {
+        $dateTime   = $this->getData(self::CREATION_TIME);
+        $dateFormat = $this->_testimonialHelper->getConfig('general/dateformat');
+        return $this->_testimonialHelper->getFormatDate($dateTime, $dateFormat);
+
+    }//end getCreateTime()
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginCreationTime()
+    {
+        $dateTime   = $this->getData(self::CREATION_TIME);
+        $dateFormat = $this->_testimonialHelper->getConfig('general/dateformat');
+        return $this->_testimonialHelper->getFormatDate($dateTime, $dateFormat);
+
+    }//end getOriginCreationTime()
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginCreationTime($value){
+        return $this->setData(self::CREATION_TIME, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIsActive(){
+        return $this->getData(self::IS_ACTIVE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsActive($value){
+        return $this->setData(self::IS_ACTIVE, $value); 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRating(){
+        return $this->getData(self::RATING);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRating($value){
+        return $this->setData(self::RATING, $value); 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getJob(){
+        return $this->getData(self::JOB);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setJob($value){
+        return $this->setData(self::JOB, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle(){
+        return $this->getData(self::TITLE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($value){
+        return $this->setData(self::TITLE, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStores()
+    {
+        return $this->hasData('stores') ? $this->getData(self::STORES) : $this->getData('store_id');
+
+    }//end getStores()
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStores($value){
+        return $this->setData(self::STORES, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategories(){
+        return $this->getData(self::CATEGORIES);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCategories($value){
+        return $this->setData(self::CATEGORIES, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTestimonialProducts(){
+        return $this->getData(self::TESTIMONIAL_PRODUCTS);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTestimonialProducts($value){
+        return $this->setData(self::TESTIMONIAL_PRODUCTS, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->getDataExtensionAttributes();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExtensionAttributes(
+        \Ves\Testimonial\Api\Data\TestimonialExtensionInterface $extensionAttributes
+    ) {
+        return $this->_setExtensionAttributes($extensionAttributes);
+    }
 
 }//end class

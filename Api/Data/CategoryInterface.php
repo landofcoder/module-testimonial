@@ -7,7 +7,7 @@ interface CategoryInterface extends \Magento\Framework\Api\ExtensibleDataInterfa
 {
     const CATEGORY_ID = 'category_id';
     const NAME = 'name';
-    const CREATION_TIME = 'creation_time';
+    const CREATION_TIME = 'create_time';
     const IS_ACTIVE = 'is_active';
 
     /**
@@ -40,14 +40,14 @@ interface CategoryInterface extends \Magento\Framework\Api\ExtensibleDataInterfa
      * Get value
      * @return string
      */
-    public function getCreationTime();
+    public function getCreateTime();
 
     /**
      * Set value
      * @param string $value
      * @return \Ves\Testimonial\Api\Data\CategoryInterface
      */
-    public function setCreationTime($value);
+    public function setCreateTime($value);
 
     /**
      * Get value

@@ -85,14 +85,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Categor
     public function getDataModel()
     {
         $categoryData = $this->getData();
-        
+
         $categoryDataObject = $this->categoryDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $categoryDataObject,
             $categoryData,
             CategoryInterface::class
         );
-        
+
         return $categoryDataObject;
     }
 
@@ -142,14 +142,14 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Categor
     /**
      * {@inheritdoc}
      */
-    public function getCreationTime(){
-        return $this->getData(self::CREATION_TIME); 
+    public function getCreateTime(){
+        return $this->getData(self::CREATION_TIME);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCreationTime($value){
+    public function setCreateTime($value){
         return $this->setData(self::CREATION_TIME, $value);
     }
 

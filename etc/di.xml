@@ -27,8 +27,8 @@
     <preference for="Ves\Testimonial\Api\Data\CategoryInterface" type="Ves\Testimonial\Model\Category"/>
     <preference for="Ves\Testimonial\Api\Data\TestimonialInterface" type="Ves\Testimonial\Model\Testimonial"/>
 
-    <preference for="Ves\Blog\Api\Data\TestimonialSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-    <preference for="Ves\Blog\Api\Data\CategorySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Ves\Testimonial\Api\Data\TestimonialSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Ves\Testimonial\Api\Data\CategorySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>

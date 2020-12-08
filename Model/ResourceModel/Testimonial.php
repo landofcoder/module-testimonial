@@ -185,6 +185,13 @@ class Testimonial extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 );
             $products   = $connection->fetchAll($select);
             $object->setData('testimonial_products', $products);
+            if($products){
+                $new_products = [];
+                foreach($products as $_product){
+                    $new_products[] = (int)$_product['product_id'];
+                }
+                $object->setData('products', $new_products);
+            }
         }
 
         if ($id = $object->getId()) {

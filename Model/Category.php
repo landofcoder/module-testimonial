@@ -20,11 +20,14 @@
  */
 
 namespace Ves\Testimonial\Model;
+use Ves\Testimonial\Api\Data\CategoryInterface;
+use Ves\Testimonial\Api\Data\CategoryInterfaceFactory;
+use Magento\Framework\Api\DataObjectHelper;
 
-class Category extends \Magento\Framework\Model\AbstractModel
+class Category extends \Magento\Framework\Model\AbstractModel implements CategoryInterface
 {
     /**
-     * Blog's Statuses
+     * Testimonial's Statuses
      */
     const STATUS_ENABLED  = 1;
     const STATUS_DISABLED = 0;
@@ -35,12 +38,18 @@ class Category extends \Magento\Framework\Model\AbstractModel
     protected $_resource;
 
 
+    protected $categoryDataFactory;
+
+    protected $dataObjectHelper;
+
     /**
      * Category constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param ResourceModel\Category|null $resource
      * @param ResourceModel\Category\Collection|null $resourceCollection
+     * @param CategoryInterfaceFactory $categoryDataFactory
+     * @param DataObjectHelper $dataObjectHelper
      * @param array $data
      */
     public function __construct(
@@ -48,10 +57,14 @@ class Category extends \Magento\Framework\Model\AbstractModel
         \Magento\Framework\Registry $registry,
         \Ves\Testimonial\Model\ResourceModel\Category $resource = null,
         \Ves\Testimonial\Model\ResourceModel\Category\Collection $resourceCollection = null,
+        CategoryInterfaceFactory $categoryDataFactory,
+        DataObjectHelper $dataObjectHelper,
         array $data = []
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->_resource = $resource;
+        $this->categoryDataFactory = $categoryDataFactory;
+        $this->dataObjectHelper = $dataObjectHelper;
 
     }//end __construct()
 
@@ -65,6 +78,23 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
     }//end _construct()
 
+    /**
+     * Retrieve category model with category data
+     * @return CategoryInterface
+     */
+    public function getDataModel()
+    {
+        $categoryData = $this->getData();
+        
+        $categoryDataObject = $this->categoryDataFactory->create();
+        $this->dataObjectHelper->populateWithArray(
+            $categoryDataObject,
+            $categoryData,
+            CategoryInterface::class
+        );
+        
+        return $categoryDataObject;
+    }
 
     /**
      * Prepare page's statuses.
@@ -81,5 +111,76 @@ class Category extends \Magento\Framework\Model\AbstractModel
 
     }//end getAvailableStatuses()
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryId(){
+        return $this->getData(self::CATEGORY_ID);
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function setCategoryId($value){
+        return $this->setData(self::CATEGORY_ID, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(){
+        return $this->getData(self::NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($value){
+        return $this->setData(self::NAME, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreationTime(){
+        return $this->getData(self::CREATION_TIME); 
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreationTime($value){
+        return $this->setData(self::CREATION_TIME, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIsActive(){
+        return $this->getData(self::IS_ACTIVE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsActive($value){
+        return $this->setData(self::IS_ACTIVE, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->getDataExtensionAttributes();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setExtensionAttributes(
+        \Ves\Testimonial\Api\Data\CategoryExtensionInterface $extensionAttributes
+    ) {
+        return $this->_setExtensionAttributes($extensionAttributes);
+    }
 }//end class

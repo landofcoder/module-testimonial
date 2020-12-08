@@ -90,6 +90,7 @@ abstract class AbstractCollection extends \Magento\Framework\Model\ResourceModel
                     $item->setData('_first_store_id', $storeId);
                     $item->setData('store_code', $storeCode);
                     $item->setData('store_id', [$result[$entityId]]);
+                    $item->setData('stores', [$result[$entityId]]);
                 }
             }//end if
         }//end if

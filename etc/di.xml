@@ -21,6 +21,15 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ves\Testimonial\Api\CategoryRepositoryInterface" type="Ves\Testimonial\Model\Api\CategoryRepository" />
+    <preference for="Ves\Testimonial\Api\TestimonialRepositoryInterface" type="Ves\Testimonial\Model\Api\TestimonialRepository" />
+
+    <preference for="Ves\Testimonial\Api\Data\CategoryInterface" type="Ves\Testimonial\Model\Category"/>
+    <preference for="Ves\Testimonial\Api\Data\TestimonialInterface" type="Ves\Testimonial\Model\Testimonial"/>
+
+    <preference for="Ves\Testimonial\Api\Data\TestimonialSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Ves\Testimonial\Api\Data\CategorySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

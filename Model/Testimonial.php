@@ -251,14 +251,14 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel implements Test
      * {@inheritdoc}
      */
     public function getCompanyWebsite(){
-        return $this->getData(self::COMPANY_WEBISTE);
+        return $this->getData(self::COMPANY_WEBSITE);
     }
 
     /**
      * {@inheritdoc}
      */
     public function setCompanyWebsite($value){
-        return $this->setData(self::COMPANY_WEBISTE, $value);
+        return $this->setData(self::COMPANY_WEBSITE, $value);
     }
 
     /**
@@ -392,7 +392,7 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel implements Test
      */
     public function getCreateTime()
     {
-        $dateTime   = $this->getData(self::CREATION_TIME);
+        $dateTime   = $this->getData(self::CREATE_TIME);
         $dateFormat = $this->_testimonialHelper->getConfig('general/dateformat');
         return $this->_testimonialHelper->getFormatDate($dateTime, $dateFormat);
 
@@ -401,19 +401,8 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel implements Test
     /**
      * {@inheritdoc}
      */
-    public function getOriginCreationTime()
-    {
-        $dateTime   = $this->getData(self::CREATION_TIME);
-        $dateFormat = $this->_testimonialHelper->getConfig('general/dateformat');
-        return $this->_testimonialHelper->getFormatDate($dateTime, $dateFormat);
-
-    }//end getOriginCreationTime()
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOriginCreationTime($value){
-        return $this->setData(self::CREATION_TIME, $value);
+    public function setCreateTime($value){
+        return $this->setData(self::CREATE_TIME, $value);
     }
 
     /**
@@ -505,15 +494,15 @@ class Testimonial extends \Magento\Framework\Model\AbstractModel implements Test
     /**
      * {@inheritdoc}
      */
-    public function getTestimonialProducts(){
-        return $this->getData(self::TESTIMONIAL_PRODUCTS);
+    public function getProducts(){
+        return $this->getData(self::PRODUCTS);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTestimonialProducts($value){
-        return $this->setData(self::TESTIMONIAL_PRODUCTS, $value);
+    public function setProducts($value){
+        return $this->setData(self::PRODUCTS, $value);
     }
 
     /**

@@ -21,14 +21,14 @@ interface TestimonialInterface extends \Magento\Framework\Api\ExtensibleDataInte
     const GOOGLEPLUS = 'googleplus';
     const ADDRESS = 'address';
     const TESTIMONIAL = 'testimonial';
-    const CREATION_TIME = 'creation_time';
+    const CREATE_TIME = 'create_time';
     const RATING = 'rating';
     const JOB = 'job';
     const IS_ACTIVE = 'is_active';
     const TITLE = 'title';
     const STORES = 'stores';
     const CATEGORIES = 'categories';
-    const TESTIMONIAL_PRODUCTS = 'testimonial_products';
+    const PRODUCTS = 'products';
 
     /**
      * Get value
@@ -238,24 +238,19 @@ interface TestimonialInterface extends \Magento\Framework\Api\ExtensibleDataInte
      */
     public function setTestimonial($value);
 
-    /**
-     * Get value
-     * @return string
-     */
-    public function getCreationTime();
 
     /**
      * Get value
      * @return string
      */
-    public function getOriginCreationTime();
+    public function getCreateTime();
 
     /**
      * Set value
      * @param string $value
      * @return \Ves\Testimonial\Api\Data\TestimonialInterface
      */
-    public function setOriginCreationTime($value);
+    public function setCreateTime($value);
 
     /**
      * Get value
@@ -339,14 +334,14 @@ interface TestimonialInterface extends \Magento\Framework\Api\ExtensibleDataInte
      * Get value
      * @return string[]|int[]
      */
-    public function getTestimonialProducts();
+    public function getProducts();
 
     /**
      * Set value
      * @param string[]|int[] $value
      * @return \Ves\Testimonial\Api\Data\TestimonialInterface
      */
-    public function setTestimonialProducts($value);
+    public function setProducts($value);
 
     /**
      * Retrieve existing extension attributes object or create a new one.

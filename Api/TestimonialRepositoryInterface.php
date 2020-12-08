@@ -31,15 +31,6 @@ interface TestimonialRepositoryInterface
     public function get($id);
 
     /**
-     * Retrieve post
-     * @param int $id
-     * @param int|null $store_id
-     * @return \Ves\Testimonial\Api\Data\TestimonialInterface
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function view($id, $store_id=null);
-
-    /**
      * Retrieve Testimonial matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Ves\Testimonial\Api\Data\TestimonialSearchResultsInterface

@@ -2,12 +2,15 @@
     "name": "venustheme/module-testimonial",
     "description": "Show customer testimonial carousel, listing, allow customer submit testimonial to review the site",
     "type": "magento2-module",
-    "version": "1.0.3",
+    "version": "1.0.4",
+    "require": {
+        "venustheme/module-all" : "1.*"
+    },
     "authors": [
         {
-            "name": "Venustheme",
-            "email": "venustheme@gmail.com",
-            "homepage": "http://www.venustheme.com"
+            "name": "Landofcoder",
+            "email": "landofcoder@gmail.com",
+            "homepage": "https://landofcoder.com"
         }
     ],
     "license": [
@@ -28,6 +31,7 @@
         "customer testimonial",
         "venustheme",
         "ves",
+        "landofcoder",
         "testimonial carousel",
         "testimonial form"
     ]

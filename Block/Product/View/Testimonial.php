@@ -159,7 +159,7 @@ class Testimonial extends \Magento\Framework\View\Element\Template implements \M
                     ],
                     'cat.testimonial_id = main_table.testimonial_id',
                     ["testimonial_id" => "testimonial_id"]
-                )->where('cat.category_id IN (?)', implode($cats, ','));
+                )->where('cat.category_id IN (?)', implode(',', $cats));
             $testimonialCollection->getSelect()->order("main_table.testimonial_id DESC")->group('cat.testimonial_id');
         }
 

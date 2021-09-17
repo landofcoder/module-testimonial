@@ -4,7 +4,7 @@ Show customer testimonial carousel, listing, allow customer submit testimonial t
 
 ###### Install Extension
 ```
-composer require venustheme/module-testimonial
+composer require landofcoder/module-testimonial
 php bin/magento module:enable Ves_Testimonial
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy -f
@@ -13,3 +13,12 @@ php bin/magento setup:static-content:deploy -f
 
 ###### manage testimonial extension
 manage testimonial by navigation to ```Venustheme > Testimonial```
+
+###### Setup Testimonial GraphQl
+```
+landofcoder/module-testimonial-graph-ql
+php bin/magento module:enable Ves_TestimonialGraphQl
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy -f
+
+```

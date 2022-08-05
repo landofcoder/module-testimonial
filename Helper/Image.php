@@ -196,7 +196,7 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
      * @param  mixed                          $file       Specific file
      * @return string
      */
-    public function getImg($product, $w=300, $h, $imgVersion='image', $file=null)
+    public function getImg($product, $w = 300, $h = 0, $imgVersion='image', $file=null)
     {
         if ($h <= 0) {
             $image = $this->_imageHelper

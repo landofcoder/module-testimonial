@@ -2,7 +2,7 @@
     "name": "landofcoder/module-testimonial",
     "description": "Show customer testimonial carousel, listing, allow customer submit testimonial to review the site",
     "type": "magento2-module",
-    "version": "1.0.5",
+    "version": "2.1.1",
     "require": {
         "venustheme/module-all" : "1.*"
     },
